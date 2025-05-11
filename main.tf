@@ -14,8 +14,8 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "rg" {
-  name     = "AUT-2025-demo"
-  location = "Australia East"
+  location = var.location
+  name     = var.resource_group_name
 }
 
 module "storage" {
