@@ -9,6 +9,16 @@ resource "azurerm_resource_group" "rg" {
   location = "Australia East"
 }
 
+terraform {
+  backend "azurerm" {
+    resource_group_name   = "tfstaterg"
+    storage_account_name  = "autdemotfstate"
+    container_name        = "tfstate"
+    key                   = "terraform.tfstate"
+  }
+}
+
+
 resource "azurerm_storage_account" "storage" {
   name                     = "autdemostorage1234"
   resource_group_name      = azurerm_resource_group.rg.name
