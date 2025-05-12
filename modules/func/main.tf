@@ -1,11 +1,11 @@
 resource "azurerm_service_plan" "plan" {
-  // If this resource already exists, import it using:
-  // terraform import module.function.azurerm_service_plan.plan "/subscriptions/57480482-27fc-46a6-8643-ee45484365ec/resourceGroups/AUT-2025-demo/providers/Microsoft.Web/serverFarms/autdemo-function-plan"
   name                = "autdemo-function-plan"
   location            = var.location
   resource_group_name = var.resource_group_name
   os_type             = "Linux"
   sku_name            = "Y1"
+  // If this resource already exists, import it using:
+  // terraform import module.function.azurerm_service_plan.plan "/subscriptions/57480482-27fc-46a6-8643-ee45484365ec/resourceGroups/AUT-2025-demo/providers/Microsoft.Web/serverFarms/autdemo-function-plan"
 }
 
 resource "azurerm_linux_function_app" "function" {
@@ -21,6 +21,8 @@ resource "azurerm_linux_function_app" "function" {
       node_version = "18"
     }
   }
+  // If this resource already exists, import it using:
+  // terraform import module.function.azurerm_linux_function_app.function "/subscriptions/57480482-27fc-46a6-8643-ee45484365ec/resourceGroups/AUT-2025-demo/providers/Microsoft.Web/sites/autdemo-functionapp1234"
 }
 
 output "function_app_id" {
