@@ -19,13 +19,13 @@ resource "azurerm_resource_group" "rg" {
 }
 
 module "storage" {
-  source              = "./modules"
+  source              = "./modules/st"
   location            = var.location
   resource_group_name = var.resource_group_name
 }
 
 module "function" {
-  source                    = "./modules"
+  source                    = "./modules/func"
   location                  = var.location
   resource_group_name       = var.resource_group_name
   storage_account_name      = module.storage.storage_account_name
