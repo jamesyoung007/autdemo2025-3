@@ -1,4 +1,6 @@
 resource "azurerm_storage_account" "storage" {
+  // If this resource already exists, import it using:
+  // terraform import module.storage.azurerm_storage_account.storage "/subscriptions/57480482-27fc-46a6-8643-ee45484365ec/resourceGroups/AUT-2025-demo/providers/Microsoft.Storage/storageAccounts/autdemostorage1234"
   name                     = "autdemostorage1234"
   resource_group_name      = var.resource_group_name
   location                 = var.location
