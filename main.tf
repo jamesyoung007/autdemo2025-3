@@ -30,6 +30,8 @@ module "function" {
   resource_group_name       = var.resource_group_name
   storage_account_name      = module.storage.storage_account_name
   storage_account_access_key = module.storage.storage_account_access_key
+  function_app_name         = "autdemo-functionapp1234"
+  service_plan_id           = azurerm_service_plan.plan.id
 }
 
 module "monitoring" {
