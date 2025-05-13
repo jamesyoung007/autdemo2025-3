@@ -18,19 +18,25 @@ resource "azurerm_resource_group" "rg" {
   location = var.location
 }
 
+// If the resource already exists in Azure, import it into the Terraform state file:
+// terraform import azurerm_service_plan.plan "/subscriptions/57480482-27fc-46a6-8643-ee45484365ec/resourceGroups/AUT-2025-demo_2/providers/Microsoft.Web/serverFarms/autdemo2-function-plan"
+
 resource "azurerm_service_plan" "plan" {
   name                = "autdemo2-function-plan"
   location            = var.location
   resource_group_name = azurerm_resource_group.rg.name
   os_type             = "Linux"
   sku_name            = "Y1"
+  count               = var.create_service_plan ? 1 : 0
 }
 
+// Ensure all resources are explicitly defined to avoid implicit defaults causing drift.
 module "storage" {
   source              = "./modules/st"
   location            = var.location
   resource_group_name = var.resource_group_name
-  storage_account_name = "autdemo2storage12"
+  storage_account_name = var.storage_account_name
+  count               = var.create_storage_account ? 1 : 0
 }
 
 module "function" {
@@ -39,15 +45,16 @@ module "function" {
   resource_group_name       = var.resource_group_name
   storage_account_name      = module.storage.storage_account_name
   storage_account_access_key = module.storage.storage_account_access_key
-  function_app_name         = "autdemo-functionapp1234"
+  function_app_name         = var.function_app_name
   service_plan_id           = azurerm_service_plan.plan.id
+  count                     = var.create_function_app ? 1 : 0
 }
 
 module "monitoring" {
   source              = "./modules/monitoring"
   location            = var.location
   resource_group_name = var.resource_group_name
-  log_analytics_workspace_name = "autdemo2-law"
+  log_analytics_workspace_name = var.log_analytics_workspace_name
 }
 
 resource "azurerm_monitor_diagnostic_setting" "function_diagnostics" {
