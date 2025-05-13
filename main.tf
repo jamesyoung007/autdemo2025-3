@@ -22,6 +22,7 @@ module "storage" {
   source              = "./modules/st"
   location            = var.location
   resource_group_name = var.resource_group_name
+  storage_account_name = "autdemo2storage12"
 }
 
 module "function" {
