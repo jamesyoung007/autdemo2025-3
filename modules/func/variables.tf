@@ -13,3 +13,16 @@ variable "storage_account_name" {
 variable "storage_account_access_key" {
   type = string
 }
+
+variable "function_app_name" {
+  type = string
+}
+
+variable "service_plan_id" {
+  type = string
+}
+
+variable "node_version" {
+  type = string
+  default = "18"
+}
