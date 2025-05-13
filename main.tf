@@ -59,7 +59,7 @@ module "monitoring" {
 
 resource "azurerm_monitor_diagnostic_setting" "function_diagnostics" {
   name                       = "diag-function"
-  target_resource_id         = module.function.function_app_id
+  target_resource_id         = module.function[0].function_app_id
   log_analytics_workspace_id = module.monitoring.log_analytics_workspace_id
 
   enabled_log {
@@ -74,6 +74,27 @@ resource "azurerm_monitor_diagnostic_setting" "function_diagnostics" {
     enabled  = true
     retention_policy {
       enabled = false
+    }
+  }
+}
+
+resource "azurerm_storage_management_policy" "storage_policy" {
+  storage_account_id = module.storage[0].storage_account_id
+
+  rule {
+    name    = "retention-policy"
+    enabled = true
+
+    filters {
+      blob_types = ["blockBlob"]
+    }
+
+    actions {
+      base_blob {
+        delete {
+          days_after_modification_greater_than = 30
+        }
+      }
     }
   }
 }
