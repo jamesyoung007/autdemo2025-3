@@ -64,17 +64,11 @@ resource "azurerm_monitor_diagnostic_setting" "function_diagnostics" {
 
   enabled_log {
     category = "FunctionAppLogs"
-    retention_policy {
-      enabled = false
-    }
   }
 
   metric {
     category = "AllMetrics"
     enabled  = true
-    retention_policy {
-      enabled = false
-    }
   }
 }
 
@@ -107,8 +101,5 @@ resource "azurerm_monitor_diagnostic_setting" "storage_diagnostics" {
   metric {
     category = "Transaction"
     enabled  = true
-    retention_policy {
-      enabled = false
-    }
   }
 }
