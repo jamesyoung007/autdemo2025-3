@@ -27,3 +27,13 @@ variable "log_analytics_workspace_name" {
   type    = string
   default = "autdemo2-law"
 }
+
+variable "storage_account_name" {
+  type    = string
+  default = "autdemo2storage12"
+}
+
+variable "function_app_name" {
+  type    = string
+  default = "autdemo-functionapp1234"
+}

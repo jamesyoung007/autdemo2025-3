@@ -43,10 +43,10 @@ module "function" {
   source                    = "./modules/func"
   location                  = var.location
   resource_group_name       = var.resource_group_name
-  storage_account_name      = module.storage.storage_account_name
-  storage_account_access_key = module.storage.storage_account_access_key
+  storage_account_name      = module.storage[0].storage_account_name
+  storage_account_access_key = module.storage[0].storage_account_access_key
   function_app_name         = var.function_app_name
-  service_plan_id           = azurerm_service_plan.plan.id
+  service_plan_id           = azurerm_service_plan.plan[0].id
   count                     = var.create_function_app ? 1 : 0
 }
 
@@ -80,7 +80,7 @@ resource "azurerm_monitor_diagnostic_setting" "function_diagnostics" {
 
 resource "azurerm_monitor_diagnostic_setting" "storage_diagnostics" {
   name                       = "diag-storage"
-  target_resource_id         = module.storage.storage_account_id
+  target_resource_id         = module.storage[0].storage_account_id
   log_analytics_workspace_id = module.monitoring.log_analytics_workspace_id
 
   metric {
