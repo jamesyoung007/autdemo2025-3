@@ -83,10 +83,7 @@ resource "azurerm_storage_management_policy" "storage_policy" {
       blob_types = ["blockBlob"]
     }
 
-    actions {
-      base_blob {
-           }
-    }
+
   }
 }
 
