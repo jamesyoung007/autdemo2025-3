@@ -38,6 +38,7 @@ module "monitoring" {
   source              = "./modules/monitoring"
   location            = var.location
   resource_group_name = var.resource_group_name
+  log_analytics_workspace_name = "autdemo2-law"
 }
 
 resource "azurerm_monitor_diagnostic_setting" "function_diagnostics" {
