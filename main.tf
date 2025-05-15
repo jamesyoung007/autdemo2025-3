@@ -85,9 +85,7 @@ resource "azurerm_storage_management_policy" "storage_policy" {
 
     actions {
       base_blob {
-        delete {
-          days_after_modification_greater_than = 30
-        }
+         delete_after_days_since_modification_greater_than = 30
       }
     }
   }
