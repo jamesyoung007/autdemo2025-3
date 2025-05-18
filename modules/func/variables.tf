@@ -22,6 +22,14 @@ variable "service_plan_id" {
   type = string
 }
 
+variable "service_plan_name" {
+  type = string
+}
+
+variable "service_plan_sku" {
+  type = string
+}
+
 variable "node_version" {
   type = string
   default = "18"
