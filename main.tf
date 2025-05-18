@@ -58,6 +58,7 @@ module "monitoring" {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "function_diagnostics" {
+  count                      = var.create_function_app ? 1 : 0
   name                       = "diag-function"
   target_resource_id         = module.function[0].function_app_id
   log_analytics_workspace_id = module.monitoring.log_analytics_workspace_id
@@ -73,6 +74,7 @@ resource "azurerm_monitor_diagnostic_setting" "function_diagnostics" {
 }
 
 resource "azurerm_storage_management_policy" "storage_policy" {
+  count              = var.create_storage_account ? 1 : 0
   storage_account_id = module.storage[0].storage_account_id
 
   rule {
@@ -92,6 +94,7 @@ resource "azurerm_storage_management_policy" "storage_policy" {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "storage_diagnostics" {
+  count                      = var.create_storage_account ? 1 : 0
   name                       = "diag-storage"
   target_resource_id         = module.storage[0].storage_account_id
   log_analytics_workspace_id = module.monitoring.log_analytics_workspace_id
