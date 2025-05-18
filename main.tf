@@ -47,6 +47,8 @@ module "function" {
   storage_account_access_key = module.storage[0].storage_account_access_key
   function_app_name         = var.function_app_name
   service_plan_id           = azurerm_service_plan.plan[0].id
+  service_plan_name         = var.service_plan_name
+  service_plan_sku          = var.service_plan_sku
   count                     = var.create_function_app ? 1 : 0
 }
 
