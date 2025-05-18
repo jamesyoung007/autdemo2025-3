@@ -37,3 +37,13 @@ variable "function_app_name" {
   type    = string
   default = "autdemo3-functionapp1234"
 }
+
+variable "service_plan_name" {
+  type    = string
+  default = "autdemo3-function-plan"
+}
+
+variable "service_plan_sku" {
+  type    = string
+  default = "Y1"
+}

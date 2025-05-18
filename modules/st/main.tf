@@ -1,11 +1,11 @@
 resource "azurerm_storage_account" "storage" {
-  name                     = "autdemo3storage1234"
+  name                     = var.storage_account_name
   resource_group_name      = var.resource_group_name
   location                 = var.location
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
+  account_tier             = var.account_tier
+  account_replication_type = var.account_replication_type
   // If this resource already exists, import it using:
-  // terraform import module.storage.azurerm_storage_account.storage "/subscriptions/57480482-27fc-46a6-8643-ee45484365ec/resourceGroups/AUT-2025-demo/providers/Microsoft.Storage/storageAccounts/autdemostorage1234"
+  // terraform import module.storage.azurerm_storage_account.storage "/subscriptions/57480482-27fc-46a6-8643-ee45484365ec/resourceGroups/AUT-2025-demo/providers/Microsoft.Storage/storageAccounts/${var.storage_account_name}"
 }
 
 output "storage_account_name" {
