@@ -22,7 +22,7 @@ resource "azurerm_resource_group" "rg" {
 // terraform import azurerm_service_plan.plan "/subscriptions/57480482-27fc-46a6-8643-ee45484365ec/resourceGroups/AUT-2025-demo_2/providers/Microsoft.Web/serverFarms/autdemo2-function-plan"
 
 resource "azurerm_service_plan" "plan" {
-  name                = "autdemo2-function-plan"
+  name                = "autdemo3-function-plan"
   location            = var.location
   resource_group_name = azurerm_resource_group.rg.name
   os_type             = "Linux"
