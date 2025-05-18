@@ -5,7 +5,7 @@ variable "location" {
 
 variable "resource_group_name" {
   type    = string
-  default = "AUT-2025-demo_2"
+  default = "AUT-2025-demo_3"
 }
 
 variable "create_service_plan" {
@@ -25,15 +25,15 @@ variable "create_function_app" {
 
 variable "log_analytics_workspace_name" {
   type    = string
-  default = "autdemo2-law"
+  default = "autdemo3-law"
 }
 
 variable "storage_account_name" {
   type    = string
-  default = "autdemo2storage12"
+  default = "autdemo3storage12"
 }
 
 variable "function_app_name" {
   type    = string
-  default = "autdemo-functionapp1234"
+  default = "autdemo3-functionapp1234"
 }
