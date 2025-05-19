@@ -21,13 +21,13 @@ resource "azurerm_resource_group" "rg" {
 // If the resource already exists in Azure, import it into the Terraform state file:
 // terraform import azurerm_service_plan.plan "/subscriptions/57480482-27fc-46a6-8643-ee45484365ec/resourceGroups/AUT-2025-demo_2/providers/Microsoft.Web/serverFarms/autdemo2-function-plan"
 
-resource "azurerm_service_plan" "plan" {
-  name                = var.service_plan_name
+module "app_service_plan" {
+  source              = "./modules/app_service_plan"
+  service_plan_name   = var.service_plan_name
   location            = var.location
-  resource_group_name = azurerm_resource_group.rg.name
-  os_type             = "Linux"
-  sku_name            = var.service_plan_sku
-  count               = var.create_service_plan ? 1 : 0
+  resource_group_name = var.resource_group_name
+  service_plan_sku    = var.service_plan_sku
+  create_service_plan = var.create_service_plan
 }
 
 // Ensure all resources are explicitly defined to avoid implicit defaults causing drift.
@@ -46,7 +46,7 @@ module "function" {
   storage_account_name      = module.storage[0].storage_account_name
   storage_account_access_key = module.storage[0].storage_account_access_key
   function_app_name         = var.function_app_name
-  service_plan_id           = azurerm_service_plan.plan[0].id
+  service_plan_id           = module.app_service_plan.service_plan_id
   service_plan_name         = var.service_plan_name
   service_plan_sku          = var.service_plan_sku
   count                     = var.create_function_app ? 1 : 0
